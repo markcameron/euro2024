@@ -20,7 +20,9 @@ class FixtureResource extends Resource
 {
     protected static ?string $model = Fixture::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-ticket';
+
+    protected static ?string $navigationGroup = 'Football API Data';
 
     public static function form(Form $form): Form
     {
