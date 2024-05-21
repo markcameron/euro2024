@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'football-api' => [
+        'key' => env('FOOTBALL_API_KEY'),
+        'url' => env('FOOTBALL_API_URL', 'https://v3.football.api-sports.io'),
+        'host' => env('FOOTBALL_API_HOST', 'v3.football.api-sports.io'),
+        'league' => 4,
+        'season' => 2024,
+    ],
+
 ];
