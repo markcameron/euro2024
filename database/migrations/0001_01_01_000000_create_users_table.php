@@ -13,12 +13,24 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+
+            $table->datetime('last_seen')->nullable();
+
+            $table->foreignId('current_team_id')->nullable();
+
+            $table->rememberToken();
+
+            $table->boolean('can_predict')->default(true);
             $table->string('name');
+            $table->string('nickname')->nullable()->default(null);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('background_color')->nullable();
+            $table->string('color')->nullable();
+            $table->string('catchphrase')->nullable()->default(null);
+            $table->string('profile_photo_path', 2048)->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

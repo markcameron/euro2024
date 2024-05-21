@@ -30,11 +30,7 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -63,7 +59,7 @@ class User extends Authenticatable implements FilamentUser
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
+        // 'profile_photo_url',
         'display_name',
     ];
 
