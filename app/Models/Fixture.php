@@ -17,7 +17,7 @@ class Fixture extends Model
 
     protected $appends = [
         'url',
-        'url_prediction',
+        // 'url_prediction',
         'started',
         'goals_home',
         'goals_away',

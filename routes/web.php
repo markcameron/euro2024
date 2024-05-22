@@ -2,9 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
-Route::get('fixtures/{fixture}', fn () => '')->name('fixtures.show');
-Route::get('predictions/{fixture}', fn () => '')->name('predictions.show');
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+Route::view('fixtures', 'fixtures')
+    ->middleware(['auth', 'verified'])
+    ->name('fixtures.index');
+
+Route::view('fixtures/{fixture}', 'fixture-detail')
+    ->middleware(['auth', 'verified'])
+    ->name('fixtures.show');
+
+Route::view('predictions', 'predictions')
+    ->middleware(['auth', 'verified'])
+    ->name('predictions.index');
+
+Route::view('predictions/{fixture}', 'prediction-detail')
+    ->middleware(['auth', 'verified'])
+    ->name('predictions.show');
+
+require __DIR__.'/auth.php';
