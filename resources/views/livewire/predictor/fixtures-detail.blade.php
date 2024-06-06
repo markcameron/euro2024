@@ -1,29 +1,20 @@
 <?php
 
-use App\Models\Fixture;
-use Livewire\Volt\Component;
-use App\Livewire\Actions\Logout;
-use Illuminate\Support\Facades\Auth;
+use function Livewire\Volt\{state};
 
-new class extends Component
-{
-    public $fixture;
-
-    public function mount(Fixture $fixture): void
-    {
-        $this->fixture = $fixture;
-    }
-};
+state([
+    'fixture' => null,
+]);
 
 ?>
 
 <section class="space-y-6">
-    <template #header>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Matches') }}
-        </h2>
-    </template>
 
+    <button wire:click="$dispatch('closeMatch')" class="w-10 mb-4 text-white font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+        </svg>
+    </button>
 
     <div class="py-2 px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">

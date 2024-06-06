@@ -1,24 +1,23 @@
 <?php
 
+use function Livewire\Volt\{state};
+use function Livewire\Volt\{computed};
+use function Livewire\Volt\{on};
 use App\Models\Fixture;
-use Livewire\Volt\Component;
-use App\Livewire\Actions\Logout;
-use Illuminate\Support\Facades\Auth;
 
-new class extends Component
-{
-    public function with(): array
-    {
-        return [
-            'fixtures' => Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderBy('date')->get()->groupBy('stage'),
-        ];
-    }
+state([
+    'displayFixture' => null,
+]);
 
-    public function predictionDetail(Fixture $fixture): void
-    {
-        $this->redirect($fixture->url_prediction);
-    }
-};
+$fixtures = computed(function () {
+    return Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderBy('date')->get()->groupBy('stage');
+});
+
+$predictionDetail = fn (Fixture $fixture) => $this->displayFixture = $fixture;
+
+on(['closePrediction' => function () {
+    $this->displayFixture = null;
+}]);
 
 ?>
 
@@ -32,7 +31,13 @@ new class extends Component
     <div class="py-2 px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
 
-            @foreach ($fixtures as $stage => $stageFixtures)
+            @if ($displayFixture)
+
+                <livewire:predictor.predictions-detail :fixture="$displayFixture" />
+
+            @else
+
+            @foreach ($this->fixtures as $stage => $stageFixtures)
                 <div class="my-6">
                     <h3 class="mb-2 font-bold font-xl text-gray">{{ $stage }}</h3>
                     @foreach ($stageFixtures as $fixture)
@@ -54,6 +59,7 @@ new class extends Component
                 </div>
             @endforeach
 
+            @endif
         </div>
     </div>
 </section>

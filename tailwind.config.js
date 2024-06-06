@@ -14,6 +14,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'euro-light': '#143cdb',
+                'euro': '#143cdb',
+                'euro-dark': '#143cdb',
+                'euro-darkest': '#143cdb',
+            },
         },
     },
 

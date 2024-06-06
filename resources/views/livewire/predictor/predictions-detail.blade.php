@@ -1,51 +1,40 @@
 <?php
 
+use function Livewire\Volt\{state};
+use function Livewire\Volt\{mount};
 use App\Models\Fixture;
 use App\Models\Prediction;
-use Livewire\Volt\Component;
-use App\Livewire\Actions\Logout;
-use Illuminate\Support\Facades\Auth;
 
-new class extends Component
-{
-    public $fixture;
-    public $prediction;
+state([
+    'fixture' => null,
+    'prediction' => null,
+]);
 
-    public function mount(Fixture $fixture): void
-    {
-        $this->fixture = $fixture;
+mount(function (Fixture $fixture) {
+    $this->prediction = Prediction::firstOrCreate([
+        'user_id' => auth()->user()->id,
+        'fixture_id' => $fixture->id,
+    ]);
 
-        $this->prediction = Prediction::firstOrCreate([
-            'user_id' => auth()->user()->id,
-            'fixture_id' => $fixture->id,
-        ]);
+    $this->prediction->score_home = $this->prediction->score_home ?? 0;
+    $this->prediction->score_away = $this->prediction->score_away ?? 0;
 
-        $this->prediction->score_home = $this->prediction->score_home ?? 0;
-        $this->prediction->score_away = $this->prediction->score_away ?? 0;
+    $this->dispatch('$refresh');
+});
 
-        $this->dispatch('$refresh');
-    }
+$increaseScore = fn (string $team) => $this->prediction->increaseScore($team);
 
-    public function increaseScore(string $team): void
-    {
-        $this->prediction->increaseScore($team);
-    }
-
-    public function decreaseScore(string $team): void
-    {
-        $this->prediction->decreaseScore($team);
-    }
-};
+$decreaseScore = fn (string $team) => $this->prediction->decreaseScore($team);
 
 ?>
 
 <section class="space-y-6">
-    <template #header>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Matches') }}
-        </h2>
-    </template>
 
+    <button wire:click="$dispatch('closePrediction')" class="w-10 mb-4 text-white font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd" />
+        </svg>
+    </button>
 
     <div class="py-2 px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">

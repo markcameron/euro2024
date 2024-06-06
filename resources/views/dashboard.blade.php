@@ -5,6 +5,6 @@
         </h2>
     </x-slot>
 
-    <livewire:predictor.fixtures-list />
+    <livewire:predictor.navigation-bottom-tabs />
 
 </x-app-layout>
