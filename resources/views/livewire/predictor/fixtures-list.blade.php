@@ -21,7 +21,7 @@ on(['closeMatch' => function () {
 
 ?>
 
-<section class="space-y-6">
+<section>
 
     <div class="py-2 px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
@@ -32,35 +32,35 @@ on(['closeMatch' => function () {
 
             @else
 
-            @foreach ($this->fixtures as $stage => $stageFixtures)
-                <div class="my-6">
-                    <h3 class="mb-2 font-bold font-xl text-gray">{{ $stage }}</h3>
-                    @foreach ($stageFixtures as $fixture)
-                        <div wire:click="fixtureDetail({{ $fixture }})" class="cursor-pointer">
-                            <div v-for="fixture in stageFixtures" class="mb-2 py-2 px-4 rounded-lg bg-white border border-white font-bold">
-                                <div class="flex flex-row">
-                                    <div class="mr-4 flex items-center"></div>
-                                    <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
-                                    @if ($fixture->started)
-                                    <div class="w-16 uppercase text-center">{{ $fixture->goals_home->count() }}</div>
-                                    @else
-                                    <div class="w-16 uppercase text-center">{{ $fixture->date->format('D d') }}</div>
-                                    @endif
-                                </div>
-                                <div class="flex flex-row">
-                                    <div class="mr-4 flex items-center"></div>
-                                    <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
-                                    @if ($fixture->started)
-                                    <div class="w-16 uppercase text-center">{{ $fixture->goals_away->count() }}</div>
-                                    @else
-                                    <div class="w-16 uppercase text-center">{{ $fixture->date->timezone('Europe/Zurich')->format('H:i') }}</div>
-                                    @endif
+                @foreach ($this->fixtures as $stage => $stageFixtures)
+                    <div class="mt-2">
+                        <h3 class="mb-2 font-bold font-xl text-euro-light">{{ $stage }}</h3>
+                        @foreach ($stageFixtures as $fixture)
+                            <div wire:click="fixtureDetail({{ $fixture }})" class="cursor-pointer">
+                                <div v-for="fixture in stageFixtures" class="mb-2 py-2 px-4 rounded-lg bg-euro-dark border border-euro-dark font-bold text-euro-light">
+                                    <div class="flex flex-row">
+                                        <div class="mr-4 flex items-center"></div>
+                                        <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
+                                        @if ($fixture->started)
+                                        <div class="w-16 uppercase text-center">{{ $fixture->goals_home->count() }}</div>
+                                        @else
+                                        <div class="w-16 uppercase text-center">{{ $fixture->date->format('D d') }}</div>
+                                        @endif
+                                    </div>
+                                    <div class="flex flex-row">
+                                        <div class="mr-4 flex items-center"></div>
+                                        <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
+                                        @if ($fixture->started)
+                                        <div class="w-16 uppercase text-center">{{ $fixture->goals_away->count() }}</div>
+                                        @else
+                                        <div class="w-16 uppercase text-center">{{ $fixture->date->timezone('Europe/Zurich')->format('H:i') }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endforeach
+                        @endforeach
+                    </div>
+                @endforeach
 
             @endif
 

@@ -25,18 +25,18 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
 
             <x-toggle label="Stats"></x-toggle>
 
-            <div class="bg-white rounded-lg py-2">
+            <div class="bg-euro-dark rounded-lg py-2 text-euro-light">
 
                 @foreach ($this->users as $position => $user)
                     <div class="border-b border-gray-300 last:border-b-0">
 
                         <div class="py-4 pr-4 py-2 flex items-center">
-                            <div class="w-8 mx-1 flex-shrink-0 font-bold text-grey-900 text-2xl text-center">{{ $position + 1 }}</div>
+                            <div class="w-8 mx-1 flex-shrink-0 font-bold text-euro-light text-2xl text-center">{{ $position + 1 }}</div>
                             <div class="flex-grow">
-                                <p class="font-bold text-gray-900">{{ $user->nickname ?? $user->name }}</p>
-                                <p class="text-sm text-gray-700">{{ $user->catchphrase }}</p>
+                                <p class="font-bold">{{ $user->nickname ?? $user->name }}</p>
+                                <p class="text-sm">{{ $user->catchphrase }}</p>
                                 @if ($user->nickname)
-                                    <p class="text-sm text-gray-700">{{ $user->name }}</p>
+                                    <p class="text-sm">{{ $user->name }}</p>
                                 @endif
                             </div>
                             <div class="w-14 flex-shrink-0 text-2xl font-bold text-right">
@@ -45,7 +45,7 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
                         </div>
 
                         @if ($this->showStats)
-                            <div class="border-t border-gray-200 p-2 bg-gray-50 flex justify-around">
+                            <div class="border-t border-gray-200 p-2 bg-euro flex justify-around">
                                 <x-leaderboard-stat type="ES">
                                     {{ $user->prediction_stats->get(ScoreType::ExactScore->value)?->count() ?? 0 }}
                                 </x-leaderboard-stat>

@@ -16,8 +16,6 @@ class Fixture extends Model
     public $guarded = [];
 
     protected $appends = [
-        'url',
-        // 'url_prediction',
         'started',
         'goals_home',
         'goals_away',
@@ -86,18 +84,6 @@ class Fixture extends Model
                 ->where('team_id', $this->away_team_id)
                 ->goals()
                 ->get(),
-        );
-    }
-
-    /**
-     * Get the Fixture detail URL
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function url(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => route('fixtures.show', $this->id),
         );
     }
 
