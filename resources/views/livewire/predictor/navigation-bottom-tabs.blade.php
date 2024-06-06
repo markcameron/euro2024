@@ -28,6 +28,7 @@ $selectTab = fn ($tab) => $this->selectedTab = $tab;
             @elseif ($selectedTab === 2)
                 <livewire:predictor.predictions-list />
             @elseif ($selectedTab === 3)
+                <livewire:predictor.leaderboard />
             @endif
         </main>
 
@@ -64,13 +65,15 @@ $selectTab = fn ($tab) => $this->selectedTab = $tab;
         let div = document.getElementById('scrollable')
 
         document.addEventListener("DOMContentLoaded", () => {
-            Livewire.hook('element.updated', (el, component) => {
-                if (component.fingerprint.name === 'navigation-tabs') {
+            Livewire.hook('morph.updated', (el, component) => {
+                console.log(el.component.name, component)
+
+                if (el.component.name === 'predictor.navigation-bottom-tabs') {
                     localStorage.setItem("scroll-position", 0);
                     div.scrollTop = 0
                 }
 
-                if (!['match-list', 'predictions-list'].includes(component.fingerprint.name)) {
+                if (!['predictor.fixtures-list', 'predictor.predictions-list'].includes(el.component.name)) {
                     return
                 }
 

@@ -16,12 +16,15 @@ class ScoreService
 
     public function getUserScore(User $user): int
     {
-        return $user->predictions->reduce(fn($carry, $prediction) => $carry + $this->getPredictionPoints($prediction), 0);
+        return $user->predictions
+            ->reduce(fn($carry, $prediction) => $carry + $this->getPredictionPoints($prediction), 0);
     }
 
     public function getUserStats(User $user)
     {
-        return $user->predictions->mapToGroups(fn($prediction) => [$this->getPredictionStatus($prediction) => 1])->filter();
+        return $user->predictions
+            ->mapToGroups(fn($prediction) => [$this->getPredictionStatus($prediction) => 1])
+            ->filter();
     }
 
     public function getLeaderboard(): Collection
