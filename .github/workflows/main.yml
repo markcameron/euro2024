@@ -13,6 +13,13 @@ jobs:
     name: Build and Dockerize
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.3]
+        stability: [prefer-stable]
+        laravel: ['11.0']
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -24,6 +31,13 @@ jobs:
     # Install PHP Vendor packages
     # - name: fake private key #Needed to fake key for composer
     #   run: touch api/storage/oauth-private.key
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl
+        coverage: none
+
     - name: PHP Version
       run: php -v
     - name: Copy ENV Laravel Configuration for CI
