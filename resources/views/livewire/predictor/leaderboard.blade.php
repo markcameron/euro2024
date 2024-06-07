@@ -25,21 +25,24 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
 
             <x-toggle label="Stats"></x-toggle>
 
-            <div class="bg-euro-dark rounded-lg py-2 text-euro-light">
+            <div class="flex flex-col gap-4">
 
                 @foreach ($this->users as $position => $user)
-                    <div class="border-b border-gray-300 last:border-b-0">
+                    <div class="bg-euro-dark rounded-4xl py-2 px-2 text-euro-light">
 
-                        <div class="py-4 pr-4 py-2 flex items-center">
-                            <div class="w-8 mx-1 flex-shrink-0 font-bold text-euro-light text-2xl text-center">{{ $position + 1 }}</div>
+                        <div class="flex items-center">
+                            <div class="w-8 mr-2 flex-shrink-0 font-bold text-2xl text-center">{{ $position + 1 }}</div>
                             <div class="flex-grow">
-                                <p class="font-bold">{{ $user->nickname ?? $user->name }}</p>
-                                <p class="text-sm">{{ $user->catchphrase }}</p>
-                                @if ($user->nickname)
-                                    <p class="text-sm">{{ $user->name }}</p>
-                                @endif
+                                <p class="font-bold">
+                                    {{ $user->nickname ?? $user->name }}
+                                    @if ($user->nickname)
+                                    <span class="text-xs text-euro">({{ $user->name }})</p>
+                                    @endif
+                                </p>
+                                <p class="text-sm text-euro">{{ $user->catchphrase }}</p>
+
                             </div>
-                            <div class="w-14 flex-shrink-0 text-2xl font-bold text-right">
+                            <div class="w-14 flex-shrink-0 text-2xl font-bold text-right mr-4">
                                 {{ $user->score }}
                             </div>
                         </div>
