@@ -1,8 +1,8 @@
 @props(['show'])
 
 @if ($show)
-    <div class="flex items-center text-white max-w-sm w-full bg-red-400 shadow-md rounded-lg overflow-hidden mx-auto mb-4">
-        <div class="w-10 border-r px-2">
+    <div class="flex items-center text-euro max-w-sm w-full bg-euro-darkest shadow-md rounded-3xl overflow-hidden mx-auto mb-4">
+        <div class="w-14 border-r px-4">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

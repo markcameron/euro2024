@@ -23,7 +23,7 @@ on(['closePrediction' => function () {
 
 <section>
 
-    <div class="py-2 px-4">
+    <div class="px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
 
             @if ($displayFixture)
@@ -33,24 +33,24 @@ on(['closePrediction' => function () {
             @else
 
                 @foreach ($this->fixtures as $stage => $stageFixtures)
-                    <div class="my-6">
+                    <div>
                         <h3 class="mb-2 font-bold font-xl text-euro-light">{{ $stage }}</h3>
-                        @foreach ($stageFixtures as $fixture)
-                            <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
-                                <div v-for="fixture in stageFixtures" class="mb-2 py-2 px-4 rounded-lg bg-euro-dark border border-euro-dark font-bold text-euro-light">
-                                    <div class="flex flex-row">
-                                        <div class="mr-4 flex items-center"></div>
-                                        <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
-                                        <div class="w-16 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_home : '-' }}</div>
-                                    </div>
-                                    <div class="flex flex-row">
-                                        <div class="mr-4 flex items-center"></div>
-                                        <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
-                                        <div class="w-16 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_away : '-' }}</div>
+                        <div class="flex flex-col gap-4">
+                            @foreach ($stageFixtures as $fixture)
+                                <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
+                                    <div v-for="fixture in stageFixtures" class="py-2 pl-7 pr-5 rounded-full bg-euro-dark border border-euro-dark font-bold text-euro-light">
+                                        <div class="flex flex-row">
+                                            <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
+                                            <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_home : '-' }}</div>
+                                        </div>
+                                        <div class="flex flex-row">
+                                            <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
+                                            <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_away : '-' }}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
 
