@@ -3,11 +3,13 @@ FROM dunglas/frankenphp:latest-php8.3-alpine
 ENV SERVER_NAME=:80
 
 RUN install-php-extensions \
-	pdo_mysql \
+    curl \
 	gd \
 	intl \
-	zip \
-	opcache
+	opcache \
+	pdo_mysql \
+    redis \
+	zip
 
 # ARG USER=www-data
 
