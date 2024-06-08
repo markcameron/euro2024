@@ -1,5 +1,7 @@
 FROM dunglas/frankenphp:latest-php8.3-alpine
 
+ENV SERVER_NAME=:8080
+
 RUN install-php-extensions \
 	pdo_mysql \
 	gd \
@@ -19,4 +21,4 @@ RUN \
 
 USER ${USER}
 
-COPY . /app/public
+COPY . /app
