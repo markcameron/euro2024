@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp
+FROM dunglas/frankenphp:latest-php8.3-alpine
 
 RUN install-php-extensions \
 	pdo_mysql \
