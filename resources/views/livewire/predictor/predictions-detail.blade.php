@@ -50,9 +50,12 @@ $decreaseScore = fn (string $team) => $this->prediction->decreaseScore($team);
                 <div class="text-3xl flex flex-row">
                     <div class="flex-grow">{{ $prediction->fixture->homeTeam->name }}</div>
                     @if ($fixture->can_predict)
-                    <div class="w-8 flex items-center justify-center cursor-pointer" wire:click="decreaseScore('home')">
+                    <button class="
+                        w-8 flex items-center justify-center cursor-pointer
+                        shadow-euro-1 transition duration-150 ease-in-out hover:bg-euro hover:shadow-euro-2 focus:bg-euro focus:shadow-euro-2 focus:outline-none focus:ring-0 active:bg-euro-dark active:shadow-euro-2 motion-reduce:transition-none
+                        " wire:click="decreaseScore('home')">
                         -
-                    </div>
+                    </button>
                     @endif
                     <div class="w-8 flex justify-center">
                         {{ $prediction->score_home }}

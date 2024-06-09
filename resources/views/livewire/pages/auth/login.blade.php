@@ -68,4 +68,15 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
     </form>
+
+    <hr class="my-4" />
+
+    <form method="GET" action="{{ route('register') }}">
+        <div>
+            <x-primary-button  :href="route('register')" class="w-full">
+                Register
+            </x-primary-button>
+        </div>
+    </form>
+
 </div>

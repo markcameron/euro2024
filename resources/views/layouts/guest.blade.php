@@ -16,17 +16,20 @@
 
         @laravelPWA
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-euro-darkest">
+            <div class="py-10">
                 <a href="/" wire:navigate>
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+            <div class="px-4">
+                <div class="max-w-5xl mx-auto px-6 py-4 lg:px-8 bg-white rounded-lg">
+                    {{ $slot }}
+                </div>
             </div>
+
         </div>
     </body>
 </html>
