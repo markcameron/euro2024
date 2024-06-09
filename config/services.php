@@ -35,6 +35,13 @@ return [
         ],
     ],
 
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => env('MAILGUN_ENDPOINT', 'api.eu.mailgun.net'),
+        'scheme' => 'https',
+    ],
+
     'football-api' => [
         'key' => env('FOOTBALL_API_KEY'),
         'url' => env('FOOTBALL_API_URL', 'https://v3.football.api-sports.io'),
