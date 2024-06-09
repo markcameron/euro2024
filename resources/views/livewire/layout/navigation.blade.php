@@ -24,7 +24,7 @@ new class extends Component
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('app') }}" wire:navigate>
-                        <x-application-logo class="block h-12 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-12 w-auto fill-current text-euro" />
                     </a>
                 </div>
 
@@ -34,7 +34,7 @@ new class extends Component
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-euro-darker hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-euro bg-euro-darker hover:text-euro-dark focus:outline-none transition ease-in-out duration-150">
                             <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
 
                             <div class="ms-1">
@@ -50,6 +50,10 @@ new class extends Component
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link wire:click="$dispatch('selectTabEvent', { tab: 5 })">
+                            {{ __('Rules') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <button wire:click="logout" class="w-full text-start">
                             <x-dropdown-link>
@@ -62,7 +66,7 @@ new class extends Component
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-euro-dark focus:outline-none focus:bg-euro-dark focus:text-euro-light transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-euro hover:text-euro-light hover:bg-euro-dark focus:outline-none focus:bg-euro-dark focus:text-euro-light transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -76,15 +80,19 @@ new class extends Component
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-4 pb-1 border-b border-euro mb-4">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
+                <div class="font-medium text-base text-euro" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                <div class="font-medium text-sm text-euro-dark">{{ auth()->user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link wire:click="$dispatch('selectTabEvent', { tab: 4 })">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link wire:click="$dispatch('selectTabEvent', { tab: 5 })">
+                    {{ __('Rules') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->
