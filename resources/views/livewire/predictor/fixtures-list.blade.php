@@ -23,7 +23,7 @@ on(['closeMatch' => function () {
 
 <section>
 
-    <div class="px-4 mt-2">
+    <div class="px-4">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
 
             @if ($fixture)
@@ -32,10 +32,9 @@ on(['closeMatch' => function () {
 
             @else
 
-                @foreach ($this->fixtures as $stage => $stageFixtures)
-                    <div>
-
-                        <div class="flex flex-col gap-4">
+                <div class="mt-2">
+                    <div class="flex flex-col gap-4">
+                        @foreach ($this->fixtures as $stage => $stageFixtures)
                             @foreach ($stageFixtures as $fixture)
                                 <div wire:click="fixtureDetail({{ $fixture }})" class="cursor-pointer">
                                     <div v-for="fixture in stageFixtures" class="py-2 px-7 rounded-full bg-euro-dark border border-euro-dark font-bold text-euro-light">
@@ -58,9 +57,9 @@ on(['closeMatch' => function () {
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
 
             @endif
 

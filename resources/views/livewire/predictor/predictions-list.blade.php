@@ -32,10 +32,9 @@ on(['closePrediction' => function () {
 
             @else
 
-                @foreach ($this->fixtures as $stage => $stageFixtures)
-                    <div>
-                        <h3 class="mb-2 font-bold font-xl text-euro-light">{{ $stage }}</h3>
-                        <div class="flex flex-col gap-4">
+                <div class="mt-2">
+                    <div class="flex flex-col gap-4">
+                        @foreach ($this->fixtures as $stage => $stageFixtures)
                             @foreach ($stageFixtures as $fixture)
                                 <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
                                     <div v-for="fixture in stageFixtures" class="py-2 pl-7 pr-5 rounded-full bg-euro-dark border border-euro-dark font-bold text-euro-light">
@@ -50,9 +49,9 @@ on(['closePrediction' => function () {
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
 
             @endif
         </div>
