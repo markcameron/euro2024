@@ -30,6 +30,7 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
                 @foreach ($this->users as $position => $user)
                     <div class="bg-euro-dark rounded-4xl py-2 px-2 text-euro-light">
 
+                        <div class="px-2 mb-1">
                         <div class="flex items-center">
                             <div class="w-8 mr-2 flex-shrink-0 font-bold text-2xl text-center">{{ $position + 1 }}</div>
                             <div class="flex-grow">
@@ -47,22 +48,24 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
                             </div>
                         </div>
 
-                        @if ($this->showStats)
-                            <div class="border-t border-gray-200 p-2 bg-euro flex justify-around">
-                                <x-leaderboard-stat type="ES">
-                                    {{ $user->prediction_stats->get(ScoreType::ExactScore->value)?->count() ?? 0 }}
-                                </x-leaderboard-stat>
-                                <x-leaderboard-stat type="GD">
-                                    {{ $user->prediction_stats->get(ScoreType::GoalDifference->value)?->count() ?? 0 }}
-                                </x-leaderboard-stat>
-                                <x-leaderboard-stat type="W">
-                                    {{ $user->prediction_stats->get(ScoreType::Winner->value)?->count() ?? 0 }}
-                                </x-leaderboard-stat>
-                                <x-leaderboard-stat type="L">
-                                    {{ $user->prediction_stats->get(ScoreType::Loser->value)?->count() ?? 0 }}
-                                </x-leaderboard-stat>
-                            </div>
-                        @endif
+
+                            @if ($this->showStats)
+                                <div class="p-2 mt-1 bg-euro flex justify-around rounded-3xl bg-euro-darkest ">
+                                    <x-leaderboard-stat type="ES">
+                                        {{ $user->prediction_stats->get(ScoreType::ExactScore->value)?->count() ?? 0 }}
+                                    </x-leaderboard-stat>
+                                    <x-leaderboard-stat type="GD">
+                                        {{ $user->prediction_stats->get(ScoreType::GoalDifference->value)?->count() ?? 0 }}
+                                    </x-leaderboard-stat>
+                                    <x-leaderboard-stat type="W">
+                                        {{ $user->prediction_stats->get(ScoreType::Winner->value)?->count() ?? 0 }}
+                                    </x-leaderboard-stat>
+                                    <x-leaderboard-stat type="L">
+                                        {{ $user->prediction_stats->get(ScoreType::Loser->value)?->count() ?? 0 }}
+                                    </x-leaderboard-stat>
+                                </div>
+                            @endif
+                        </div>
 
                     </div>
                 @endforeach

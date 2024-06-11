@@ -4,7 +4,7 @@
         class="flex items-center cursor-pointer"
     >
         <!-- label -->
-        <div class="mr-3 text-white font-bold">
+        <div class="mr-3 text-euro font-bold">
             {{ $label }}
         </div>
         <!-- toggle -->
@@ -14,7 +14,7 @@
             <!-- line -->
             <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
             <!-- dot -->
-            <div class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            <div class="dot absolute w-6 h-6 bg-euro-light rounded-full shadow -left-1 -top-1 transition"></div>
         </div>
 
     </label>
@@ -24,6 +24,6 @@
     /* Toggle B */
     input:checked ~ .dot {
         transform: translateX(100%);
-        background-color: #2BA5B7;
+        background-color: #486581;
     }
 </style>
