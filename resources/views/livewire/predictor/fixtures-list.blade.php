@@ -10,7 +10,7 @@ state([
 ]);
 
 $fixtures = computed(function () {
-    return Fixture::with(['homeTeam', 'awayTeam'])->orderBy('date')->get()->groupBy('stage');
+    return Fixture::with(['homeTeam', 'awayTeam'])->get()->sortBy('date')->groupBy('stage');
 });
 
 $fixtureDetail = fn (Fixture $fixture) => $this->fixture = $fixture;
