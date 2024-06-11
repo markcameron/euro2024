@@ -10,7 +10,7 @@ state([
 ]);
 
 $fixtures = computed(function () {
-    return Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderBy('date')->get()->groupBy('stage');
+    return Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderBy('date')->get();
 });
 
 $predictionDetail = fn (Fixture $fixture) => $this->displayFixture = $fixture;
@@ -34,8 +34,7 @@ on(['closePrediction' => function () {
 
                 <div class="mt-2">
                     <div class="flex flex-col gap-4">
-                        @foreach ($this->fixtures as $stage => $stageFixtures)
-                            @foreach ($stageFixtures as $fixture)
+                        @foreach ($this->fixtures as $fixture)
                                 <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
                                     <div v-for="fixture in stageFixtures" class="py-2 pl-7 pr-5 rounded-full bg-euro-dark border border-euro-dark font-bold text-euro-light">
                                         <div class="flex flex-row">
@@ -48,7 +47,6 @@ on(['closePrediction' => function () {
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
                         @endforeach
                     </div>
                 </div>
