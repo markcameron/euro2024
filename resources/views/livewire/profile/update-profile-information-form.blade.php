@@ -88,13 +88,13 @@ new class extends Component
 
         <div>
             <x-input-label for="nickname" :value="__('Nickname')" />
-            <x-text-input wire:model="nickname" id="nickname" name="nickname" type="text" class="mt-1 block w-full" required autofocus autocomplete="nickname" />
+            <x-text-input wire:model="nickname" id="nickname" name="nickname" type="text" class="mt-1 block w-full" autocomplete="nickname" />
             <x-input-error class="mt-2" :messages="$errors->get('nickname')" />
         </div>
 
         <div>
             <x-input-label for="catchphrase" :value="__('Catchphrase')" />
-            <x-text-input wire:model="catchphrase" id="catchphrase" name="catchphrase" type="text" class="mt-1 block w-full" required autofocus autocomplete="catchphrase" />
+            <x-text-input wire:model="catchphrase" id="catchphrase" name="catchphrase" type="text" class="mt-1 block w-full" autocomplete="catchphrase" />
             <x-input-error class="mt-2" :messages="$errors->get('catchphrase')" />
         </div>
 
