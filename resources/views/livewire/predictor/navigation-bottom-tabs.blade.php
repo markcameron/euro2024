@@ -131,7 +131,6 @@ on(['selectTabEvent' => function ($tab) {
 
         document.addEventListener("DOMContentLoaded", () => {
             Livewire.hook('morph.updated', (el, component) => {
-                console.log(el.component.name, component)
 
                 if (el.component.name === 'predictor.navigation-bottom-tabs') {
                     localStorage.setItem("scroll-position", 0);
