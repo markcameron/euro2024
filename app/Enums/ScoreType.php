@@ -12,10 +12,10 @@ enum ScoreType: string
     public function icon(): string
     {
         return match ($this) {
-            self::ExactScore => 'heroicon-o-hand-thumb-up',
-            self::GoalDifference => 'heroicon-o-face-smile',
-            self::Winner => 'heroicon-o-face-frown',
-            self::Loser => 'heroicon-o-hand-thumb-down',
+            self::ExactScore => 'heroicon-o-check-badge',
+            self::GoalDifference => 'heroicon-o-arrows-right-left',
+            self::Winner => 'heroicon-o-academic-cap',
+            self::Loser => 'heroicon-o-x-mark',
         };
     }
 
