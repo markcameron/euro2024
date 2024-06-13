@@ -35,18 +35,25 @@ on(['closePrediction' => function () {
                 <div class="mt-2">
                     <div class="flex flex-col gap-4">
                         @foreach ($this->fixtures as $fixture)
-                                <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
-                                    <div v-for="fixture in stageFixtures" class="py-2 pl-7 pr-5 rounded-full bg-euro-dark border border-euro-dark font-bold text-euro-light">
-                                        <div class="flex flex-row">
-                                            <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
-                                            <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_home : '-' }}</div>
-                                        </div>
-                                        <div class="flex flex-row">
-                                            <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
-                                            <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_away : '-' }}</div>
-                                        </div>
+                            <div wire:click="predictionDetail({{ $fixture }})" class="cursor-pointer">
+                                <div v-for="fixture in stageFixtures" @class([
+                                        'py-2 pl-7 pr-5',
+                                        'rounded-full',
+                                        'font-bold',
+                                        'bg-euro-dark',
+                                        'text-euro-light' => $fixture->can_predict,
+                                        'text-euro-darkest' => !$fixture->can_predict,
+                                    ])>
+                                    <div class="flex flex-row">
+                                        <div class="flex flex-grow items-center">{{ $fixture->homeTeam->name }}</div>
+                                        <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_home : '-' }}</div>
+                                    </div>
+                                    <div class="flex flex-row">
+                                        <div class="flex flex-grow items-center">{{ $fixture->awayTeam->name }}</div>
+                                        <div class="w-8 uppercase text-center">{{ $fixture->userPrediction ? $fixture->userPrediction->score_away : '-' }}</div>
                                     </div>
                                 </div>
+                            </div>
                         @endforeach
                     </div>
                 </div>
