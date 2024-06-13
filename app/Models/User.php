@@ -99,6 +99,18 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
+     * Get the user nickname
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function nickname(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => blank($value) ? null : $value,
+        );
+    }
+
+    /**
      * Get the user display_name
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute

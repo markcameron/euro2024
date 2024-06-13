@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Button</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes grow {
+            from { width: 40px; }
+            to { width: 120px; }
+        }
+
+        @keyframes shrink {
+            from { width: 120px; }
+            to { width: 40px; }
+        }
+
+        .grow {
+            animation: grow 0.5s forwards;
+        }
+
+        .shrink {
+            animation: shrink 0.5s forwards;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <button id="toggleButton" class="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded transition-all duration-500 overflow-hidden">
+        <span class="material-icons">add</span>
+        <span id="buttonText" class="ml-2 opacity-0 whitespace-nowrap">Add Item</span>
+    </button>
+
+    <script>
+        const button = document.getElementById('toggleButton');
+        const buttonText = document.getElementById('buttonText');
+        let isExpanded = false;
+
+        button.addEventListener('click', () => {
+            if (isExpanded) {
+                button.classList.remove('grow');
+                button.classList.add('shrink');
+                buttonText.classList.remove('opacity-100');
+                buttonText.classList.add('opacity-0');
+            } else {
+                button.classList.remove('shrink');
+                button.classList.add('grow');
+                buttonText.classList.remove('opacity-0');
+                buttonText.classList.add('opacity-100');
+            }
+            isExpanded = !isExpanded;
+        });
+    </script>
+</body>
+</html>

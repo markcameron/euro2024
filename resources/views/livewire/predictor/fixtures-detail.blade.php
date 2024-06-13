@@ -1,10 +1,15 @@
 <?php
 
-use function Livewire\Volt\{state};
+use App\Models\User;
+use function Livewire\Volt\{computed,state};
 
 state([
     'fixture' => null,
 ]);
+
+$users = computed(function () {
+    return User::get();
+});
 
 ?>
 
@@ -16,7 +21,7 @@ state([
         </svg>
     </button>
 
-    <div class="max-w-5xl sm:px-6 lg:px-8">
+    <div class="max-w-5xl sm:px-6 lg:px-8 flex flex-col gap-4">
 
         <div class="py-6 px-7 bg-euro-dark rounded-4xl text-euro-light">
 
@@ -34,6 +39,44 @@ state([
             </div>
 
         </div>
+
+        @if ($fixture->events->isNotEmpty())
+            <div class="py-6 px-7 bg-euro-dark rounded-4xl text-euro-light">
+                @foreach ($fixture->events as $event)
+                    <div class="border-b border-euro last:border-b-0 flex flex-row">
+                        <div class="flex-1 font-bold">{{ $event->team_id === $fixture->homeTeam->id ? $event->player_name : '' }}</div>
+                        <div class="w-10 text-center font-bold">{{ $event->time_elapsed }}'</div>
+                        <div class="flex-1 font-bold text-right">{{ $event->team_id === $fixture->awayTeam->id ? $event->player_name : '' }}</div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+        @if ($fixture->started)
+            @foreach ($this->users as $user)
+                <div class="py-1 pl-4 pr-1 bg-euro-dark rounded-4xl text-euro-light">
+                    <div class="flex items-center px-2 py-2">
+                        <div class="flex-grow">
+                            <p class="font-bold text-euro-light">
+                                {{ $user->nickname ?? $user->name }}
+                            </p>
+                        </div>
+                        @if ($user->prediction($fixture))
+                            <div class="w-14 flex-shrink-0 text-2xl font-bold">
+                                {{ $user->prediction($fixture)?->score_home }} - {{ $user->prediction($fixture)?->score_away }}
+                            </div>
+                            <div class="flex bg-euro-darkest w-10 h-10 flex-shrink-0 rounded-full ml-2 items-center justify-center">
+                                <livewire:predictor.prediction-icon :prediction="$user->prediction($fixture)" />
+                            </div>
+                        @else
+                            <div class="flex justify-center">
+                                <span class="bg-euro-darkest text-euro font-bold px-10 py-1 rounded-full">FAIL</span>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        @endif
     </div>
 
 </section>

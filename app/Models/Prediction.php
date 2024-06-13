@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ScoreType;
 use App\Models\User;
 
 use App\Models\Fixture;
@@ -58,7 +59,7 @@ class Prediction extends Model
         $this->save();
     }
 
-    public function getPredictionStatus(): string
+    public function getPredictionStatus(): ?ScoreType
     {
         $scoreService = new ScoreService();
         return $scoreService->getPredictionStatus($this);

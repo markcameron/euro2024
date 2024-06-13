@@ -31,23 +31,22 @@ $toggleStats = fn () => $this->showStats =! $this->showStats;
                     <div class="bg-euro-dark rounded-4xl py-2 px-2 text-euro-light">
 
                         <div class="px-2 mb-1">
-                        <div class="flex items-center">
-                            <div class="w-8 mr-2 flex-shrink-0 font-bold text-2xl text-center">{{ $position + 1 }}</div>
-                            <div class="flex-grow">
-                                <p class="font-bold">
-                                    {{ $user->nickname ?? $user->name }}
-                                    @if ($user->nickname)
-                                    <span class="text-xs text-euro">({{ $user->name }})</p>
-                                    @endif
-                                </p>
-                                <p class="text-sm text-euro">{{ $user->catchphrase }}</p>
+                            <div class="flex items-center">
+                                <div class="w-8 mr-2 flex-shrink-0 font-bold text-2xl text-center">{{ $position + 1 }}</div>
+                                <div class="flex-grow">
+                                    <p class="font-bold">
+                                        {{ $user->nickname ?? $user->name }}
+                                        @if ($user->nickname)
+                                        <span class="text-xs text-euro">({{ $user->name }})</p>
+                                        @endif
+                                    </p>
+                                    <p class="text-sm text-euro">{{ $user->catchphrase }}</p>
 
+                                </div>
+                                <div class="w-14 flex-shrink-0 text-2xl font-bold text-right mr-4">
+                                    {{ $user->score }}
+                                </div>
                             </div>
-                            <div class="w-14 flex-shrink-0 text-2xl font-bold text-right mr-4">
-                                {{ $user->score }}
-                            </div>
-                        </div>
-
 
                             @if ($this->showStats)
                                 <div class="p-2 mt-1 bg-euro flex justify-around rounded-3xl bg-euro-darkest ">

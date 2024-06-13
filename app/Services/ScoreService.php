@@ -45,7 +45,7 @@ class ScoreService
         return $users;
     }
 
-    public function getPredictionStatus(?Prediction $prediction): ?string
+    public function getPredictionStatus(?Prediction $prediction): ?ScoreType
     {
         if (is_null($prediction)) {
             return null;
@@ -56,18 +56,18 @@ class ScoreService
         }
 
         if ($this->predictedCorrectScore($prediction)) {
-            return ScoreType::ExactScore->value;
+            return ScoreType::ExactScore;
         }
 
         if ($this->predictedCorrectDifference($prediction)) {
-            return ScoreType::GoalDifference->value;
+            return ScoreType::GoalDifference;
         }
 
         if ($this->predictedCorrectWinner($prediction)) {
-            return ScoreType::Winner->value;
+            return ScoreType::Winner;
         }
 
-        return ScoreType::Loser->value;
+        return ScoreType::Loser;
     }
 
     private function getPredictionPoints(Prediction $prediction): int
