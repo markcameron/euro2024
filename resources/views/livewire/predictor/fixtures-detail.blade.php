@@ -55,7 +55,7 @@ $users = computed(function () {
         @if ($fixture->started)
             @foreach ($this->users as $user)
                 <div class="py-1 pl-4 pr-1 bg-euro-dark rounded-4xl text-euro-light">
-                    <div class="flex items-center px-2 py-2">
+                    <div class="flex items-center">
                         <div class="flex-grow">
                             <p class="font-bold text-euro-light">
                                 {{ $user->nickname ?? $user->name }}

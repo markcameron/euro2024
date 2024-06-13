@@ -23,7 +23,7 @@ class ScoreService
     public function getUserStats(User $user)
     {
         return $user->predictions
-            ->mapToGroups(fn($prediction) => [$this->getPredictionStatus($prediction) => 1])
+            ->mapToGroups(fn($prediction) => [$this->getPredictionStatus($prediction)?->value => 1])
             ->filter();
     }
 

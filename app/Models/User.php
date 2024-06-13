@@ -9,9 +9,10 @@ use Illuminate\Support\Str;
 // use Laravel\Sanctum\HasApiTokens;
 // use Laravel\Jetstream\HasProfilePhoto;
 use App\Services\ScoreService;
-use Illuminate\Notifications\Notifiable;
+use Filament\Support\Colors\Color;
 // use Laravel\Fortify\TwoFactorAuthenticatable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -130,12 +131,24 @@ class User extends Authenticatable implements FilamentUser
     {
         $count = $this->predictions->count();
         $total = Fixture::count();
-        $color = 'text-danger-500';
-        if ($count === $total) {
-            $color = 'text-success-500';
-        }
+
         return Attribute::make(
-            get: fn ($value) => '<span class="' . $color . '">' . $count . ' / ' . $total . '</span>',
+            get: fn ($value) => $count . ' / ' . $total,
+        );
+    }
+
+    /**
+     * Get the status of number of predictions
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function predictionStatusColor(): Attribute
+    {
+        $count = $this->predictions->count();
+        $total = Fixture::count();
+
+        return Attribute::make(
+            get: fn ($value) => $count === $total ? Color::Green : Color::Red,
         );
     }
 

@@ -88,6 +88,10 @@ class UserResource extends Resource
                     ->dateTime()
                     ->sortable(),
 
+                Tables\Columns\TextColumn::make('prediction_status')
+                    ->color(fn (User $record) => $record->prediction_status_color)
+                    ->html(),
+
                 // Tables\Columns\TextColumn::make('current_team_id')
                 //     ->numeric()
                 //     ->sortable(),
@@ -95,21 +99,17 @@ class UserResource extends Resource
                 Tables\Columns\IconColumn::make('can_predict')
                     ->boolean(),
 
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-
                 Tables\Columns\TextColumn::make('background_color')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('color')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('catchphrase')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('profile_photo_path')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
