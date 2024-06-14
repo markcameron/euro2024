@@ -11,7 +11,7 @@ state([
 ]);
 
 $users = computed(function () {
-    return User::with(['predictions.fixture'])->get()->sortByDesc('leaderboard_sort');
+    return User::with(['predictions.fixture'])->get()->sortByDesc('leaderboard_sort')->values();
 });
 
 $toggleStats = fn () => $this->showStats =! $this->showStats;
