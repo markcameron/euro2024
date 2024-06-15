@@ -40,13 +40,25 @@ $users = computed(function () {
 
         </div>
 
-        @if ($fixture->events->isNotEmpty())
+        @if ($fixture->events()->goals()->get()->isNotEmpty())
             <div class="py-6 px-7 bg-euro-dark rounded-4xl text-euro-light">
-                @foreach ($fixture->events as $event)
+                @foreach ($fixture->events()->goals()->get() as $event)
                     <div class="border-b border-euro last:border-b-0 flex flex-row">
-                        <div class="flex-1 font-bold">{{ $event->team_id === $fixture->homeTeam->id ? $event->player_name : '' }}</div>
+                        <div class="flex-1 font-bold">
+                            @if ($event->team_id === $fixture->homeTeam->id)
+                                {{ $event->player_name }}
+                                {{ $event->isOwnGoal() ? '(OG)' : '' }}
+                                {{ $event->isPenalty() ? '(Pen.)' : '' }}
+                            @endif
+                        </div>
                         <div class="w-10 text-center font-bold">{{ $event->time_elapsed }}'</div>
-                        <div class="flex-1 font-bold text-right">{{ $event->team_id === $fixture->awayTeam->id ? $event->player_name : '' }}</div>
+                        <div class="flex-1 font-bold text-right">
+                            @if ($event->team_id === $fixture->awayTeam->id)
+                                {{ $event->player_name }}
+                                {{ $event->isOwnGoal() ? '(OG)' : '' }}
+                                {{ $event->isPenalty() ? '(Pen.)' : '' }}
+                            @endif
+                        </div>
                     </div>
                 @endforeach
             </div>

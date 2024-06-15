@@ -25,4 +25,14 @@ class Event extends Model
             ->whereIn('detail', ['Normal Goal', 'Penalty', 'Own Goal'])
             ->whereNull('comments');
     }
+
+    public function isOwnGoal(): bool
+    {
+        return $this->detail === 'Own Goal';
+    }
+
+    public function isPenalty(): bool
+    {
+        return $this->detail === 'Penalty';
+    }
 }
