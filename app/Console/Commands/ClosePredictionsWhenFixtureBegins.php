@@ -29,7 +29,7 @@ class ClosePredictionsWhenFixtureBegins extends Command
     public function handle()
     {
         Fixture::where('can_predict', 1)
-            ->where('date', '<', now()->toDateTimeString())
+            ->where('date', '<', now()->subMinutes(5)->toDateTimeString())
             ->update([
                 'can_predict' => false,
             ]);
