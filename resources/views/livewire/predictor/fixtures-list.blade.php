@@ -1,16 +1,28 @@
 <?php
 
+use App\Models\Fixture;
+use function Livewire\Volt\{on};
 use function Livewire\Volt\{state};
 use function Livewire\Volt\{computed};
-use function Livewire\Volt\{on};
-use App\Models\Fixture;
 
 state([
     'fixture' => null,
 ]);
 
+$sortOrder = computed(function () {
+    return collect([
+        'Final',
+        '3rd Place Final',
+        'Quarter-finals',
+        'Semi-finals',
+        'Quarter-finals',
+        'Round of 16',
+        'Group',
+    ]);
+});
+
 $fixtures = computed(function () {
-    return Fixture::with(['homeTeam', 'awayTeam'])->orderBy('date')->get();
+    return Fixture::with(['homeTeam', 'awayTeam'])->orderByRaw('FIND_IN_SET(stage, "' . $this->sortOrder->implode(',') . '")')->orderBy('date')->get();
 });
 
 $todaysFixtures = computed(function () {

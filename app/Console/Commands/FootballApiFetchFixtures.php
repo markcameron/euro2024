@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use App\Models\Venue;
 use App\Models\Fixture;
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use App\Transporter\Requests\FixturesRequest;
 
@@ -57,7 +58,7 @@ class FootballApiFetchFixtures extends Command
                 'home_team_id' => $fixture['teams']['home']['id'],
                 'away_team_id' => $fixture['teams']['away']['id'],
                 'venue_id'  => $venue->id,
-                'stage' => $fixture['league']['round'],
+                'stage' => $this->round($fixture),
             ]
         );
     }
@@ -68,5 +69,14 @@ class FootballApiFetchFixtures extends Command
             'name' => $fixture['fixture']['venue']['name'],
             'city' => $fixture['fixture']['venue']['city'],
         ]);
+    }
+
+    private function round(array $fixture): string
+    {
+        if (Str::startsWith($fixture['league']['round'], 'Group')) {
+            return 'Group';
+        }
+
+        return $fixture['league']['round'];
     }
 }

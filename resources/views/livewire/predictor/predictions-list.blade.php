@@ -9,8 +9,21 @@ state([
     'displayFixture' => null,
 ]);
 
+$sortOrder = computed(function () {
+    return collect([
+        'Final',
+        '3rd Place Final',
+        'Quarter-finals',
+        'Semi-finals',
+        'Quarter-finals',
+        'Round of 16',
+        'Group',
+    ]);
+});
+
+
 $fixtures = computed(function () {
-    return Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderBy('date')->get();
+    return Fixture::with(['homeTeam', 'awayTeam', 'userPrediction'])->orderByRaw('FIND_IN_SET(stage, "' . $this->sortOrder->implode(',') . '")')->orderBy('date')->get();
 });
 
 $predictionDetail = fn (Fixture $fixture) => $this->displayFixture = $fixture;
