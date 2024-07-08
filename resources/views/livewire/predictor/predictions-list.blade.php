@@ -13,7 +13,6 @@ $sortOrder = computed(function () {
     return collect([
         'Final',
         '3rd Place Final',
-        'Quarter-finals',
         'Semi-finals',
         'Quarter-finals',
         'Round of 16',
